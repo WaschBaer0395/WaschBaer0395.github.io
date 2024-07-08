@@ -2,7 +2,7 @@
   "name": "sc-mapper",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://waschbaer0395.github.io/admin",
+  "homepage": "https://waschbaer0395.github.io",
   "type": "module",
   "scripts": {
     "start": "vite",
