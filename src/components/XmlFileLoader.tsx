@@ -11,7 +11,7 @@ const XmlFileLoader: React.FC = () => {
     const [error, setError] = useState<string | null>(null)
 
 
-    // @ts-ignore
+    /* eslint-disable @typescript-eslint/no-unused-vars */
     const [devices, setDevices] = useState<Devices[]>([])
 
 
@@ -30,6 +30,7 @@ const XmlFileLoader: React.FC = () => {
         }
     };
 
+
     const handleDownload = () => {
         if (data) {
             const xml = convertToXML(data);
@@ -42,7 +43,7 @@ const XmlFileLoader: React.FC = () => {
             URL.revokeObjectURL(url);
         }
     };
-
+    /* eslint-enable @typescript-eslint/no-unused-vars */
 
 
     return (

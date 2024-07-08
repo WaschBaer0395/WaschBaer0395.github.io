@@ -2,20 +2,20 @@ import {Mapping} from "./interfaces/Mapping.ts";
 import {Devices,Inputs} from "./interfaces/Devices.ts";
 
 
-// @ts-ignore
+/* eslint-enable @typescript-eslint/no-unused-vars */
 export const getDevices = (mapping: Mapping): Array<Devices> => {
-    let returnValue = new Array<Devices>()
+    const returnValue = new Array<Devices>()
 
     console.log("--- getDevices-Debug --- START")
 
     console.log(mapping['attributes']['profileName']) //Need to save that info somewhere too
-    let devices = mapping['CustomisationUIHeader'][0].devices[0]
-    let keys = Object.keys(devices)
-    for (let index in keys){
-        let device = keys[index];
-        let instance = getInstance({obj: devices, key: device});
-        let prefix = getPrefix(device)
-        let inputs = getInputs(mapping, prefix, instance);
+    const devices = mapping['CustomisationUIHeader'][0].devices[0]
+    const keys = Object.keys(devices)
+    for (const index in keys){
+        const device = keys[index];
+        const instance = getInstance({obj: devices, key: device});
+        const prefix = getPrefix(device)
+        const inputs = getInputs(mapping, prefix, instance);
         returnValue[index] = {
             deviceName: keys[index],
             inputs: inputs,
@@ -28,6 +28,7 @@ export const getDevices = (mapping: Mapping): Array<Devices> => {
 
     return returnValue;
 };
+/* eslint-enable @typescript-eslint/no-unused-vars */
 
 const getInputs = (mapping: Mapping, prefix: string, instance: number): Inputs[] => {
     console.log(mapping,prefix,instance)
