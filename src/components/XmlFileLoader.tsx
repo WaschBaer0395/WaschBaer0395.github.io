@@ -1,6 +1,6 @@
 // src/components/XmlFileLoader.tsx
 import React, {useState} from 'react'
-import {ActionMaps} from '../utils/interfaces/ActionMaps.ts'
+import {ActionMaps} from '../utils/interfaces/Mapping.ts'
 import {convertToXML, parseXML} from '../utils/parseXML.ts';
 import {Devices} from "../utils/interfaces/Devices.ts";
 import {getDevices} from "../utils/convert.ts";

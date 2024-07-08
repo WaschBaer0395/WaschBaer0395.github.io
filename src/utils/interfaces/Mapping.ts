@@ -1,34 +1,34 @@
 // the interface to represent the xml structure
-export interface ActionMaps {
+export interface Mapping {
     attributes: {
         version: string
         optionsVersion: string
         rebindVersion: string
         profileName: string
     }
-    CustomisationUIHeader: {
+    CustomisationUIHeader: Array<{
         attributes: {
             label: string
             description: string
             image: string
         }
-        devices: {
-            keyboard: {
+        devices: Array<{
+            keyboard: Array<{
                 attributes: {
                     instance: string
                 }
-            }
-            mouse: {
+            }>
+            mouse: Array<{
                 attributes: {
                     instance: string
                 }
-            }
+            }>
             joystick: Array<{
                 attributes: {
                     instance: string
                 }
             }>
-        }
+        }>
         categories: {
             category: Array<{
                 attributes: {
@@ -36,7 +36,7 @@ export interface ActionMaps {
                 }
             }>
         }
-    }
+    }>
     deviceoptions: Array<{
         attributes: {
             name: string
