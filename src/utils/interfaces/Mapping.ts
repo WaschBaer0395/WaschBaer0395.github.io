@@ -38,7 +38,7 @@ export interface Mapping {
             }>
         }
     }>
-    deviceoptions: Array<{
+    deviceoptions: {
         attributes: {
             name: string
         }
@@ -50,7 +50,7 @@ export interface Mapping {
                 acceleration?: string
             }
         }>
-    }>
+    }
     options: Array<{
         attributes: {
             type: string
@@ -59,7 +59,7 @@ export interface Mapping {
         }
     }>
     actionmap: Actionmap
-};
+}
 
 export interface Actionmap {
     attributes: {
