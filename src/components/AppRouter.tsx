@@ -7,8 +7,8 @@ const AppRouter = () => {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<MainScreen />} />
-                <Route path="/admin" element={<Debug />} />
+                <Route path="/" element={<Debug />} />
+                <Route path="/admin" element={<MainScreen />} />
             </Routes>
         </Router>
     )
