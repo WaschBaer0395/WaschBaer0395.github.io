@@ -1,13 +1,13 @@
 // src/components/XmlFileLoader.tsx
 import React, {useState} from 'react'
-import {Mapping} from '../utils/interfaces/Mapping.ts'
+import {ActionMaps} from '../utils/interfaces/ActionMaps.ts'
 import {convertToXML, parseXML} from '../utils/parseXML.ts';
 import {Devices} from "../utils/interfaces/Devices.ts";
 import {getDevices} from "../utils/convert.ts";
 
 
 const XmlFileLoader: React.FC = () => {
-    const [data, setData] = useState<Mapping | null>(null)
+    const [data, setData] = useState<ActionMaps | null>(null)
     const [error, setError] = useState<string | null>(null)
 
 
