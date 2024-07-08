@@ -1,14 +1,18 @@
 // the interface to represent the xml structure
 
 export interface ActionMaps {
-    version: string
-    optionsVersion: string
-    rebindVersion: string
-    profileName: string
+    _attributes: {
+        version: string
+        optionsVersion: string
+        rebindVersion: string
+        profileName: string
+    }
     CustomisationUIHeader: {
-        label: string
-        description: string
-        image: string
+        _attributes: {
+            label: string
+            description: string
+            image: string
+        }
         devices: {
             keyboard: {
                 _instance: string
@@ -27,27 +31,39 @@ export interface ActionMaps {
         }
     }
     deviceoptions: Array<{
-        name: string
+        _attributes: {
+            name: string
+        }
         option: Array<{
-            input: string
-            deadzone?: string
-            saturation?: string
-            acceleration?: string
+            _attributes: {
+                input: string
+                deadzone?: string
+                saturation?: string
+                acceleration?: string
+            }
         }>
     }>
     options: Array<{
-        type: string
-        instance: string
-        Product: string
+        _attributes: {
+            type: string
+            instance: string
+            Product: string
+        }
     }>
     actionmap: Array<{
-        name: string
-        action: Array<{
+        _attributes: {
             name: string
+        }
+        action: Array<{
+            _attributes: {
+                name: string
+            }
             rebind: Array<{
-                input: string
-                activationMode?: string
-                multiTap?: string
+                _attributes: {
+                    input: string
+                    activationMode?: string
+                    multiTap?: string
+                }
             }>
         }>
     }>
