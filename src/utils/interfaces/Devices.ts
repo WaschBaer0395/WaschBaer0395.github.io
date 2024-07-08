@@ -1,7 +1,8 @@
 export interface Devices{
-    instance: number,
-    prefix: string,
     deviceName: string,
+    deviceType: string,
+    instance: string,
+    prefix: string,
     inputs: Inputs[], // 0-135
 
 }

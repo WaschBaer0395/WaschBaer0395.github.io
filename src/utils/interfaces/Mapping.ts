@@ -58,21 +58,23 @@ export interface Mapping {
             Product: string
         }
     }>
-    actionmap: Array<{
+    actionmap: Actionmap
+};
+
+export interface Actionmap {
+    attributes: {
+        name: string
+    }
+    action: Array<{
         attributes: {
             name: string
         }
-        action: Array<{
+        rebind: Array<{
             attributes: {
-                name: string
+                input: string
+                activationMode?: string
+                multiTap?: string
             }
-            rebind: Array<{
-                attributes: {
-                    input: string
-                    activationMode?: string
-                    multiTap?: string
-                }
-            }>
         }>
     }>
-};
+}

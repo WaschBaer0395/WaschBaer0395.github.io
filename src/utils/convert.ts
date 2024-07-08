@@ -4,50 +4,70 @@ import {Devices,Inputs} from "./interfaces/Devices.ts";
 
 /* eslint-enable @typescript-eslint/no-unused-vars */
 export const getDevices = (mapping: Mapping): Array<Devices> => {
+    /*
+        meta info that is not preserved here:
+        mapping.attributes
+        mapping['CustomisationUIHeader'][0].attributes
+        mapping['CustomisationUIHeader'][0].categories
+        mapping['modifiers'] // <- this one is strange,
+     */
     const returnValue = new Array<Devices>()
-
     console.log("--- getDevices-Debug --- START")
-
-    console.log(mapping['attributes']['profileName']) //Need to save that info somewhere too
+    console.log("Mapping: ",mapping)
     const devices = mapping['CustomisationUIHeader'][0].devices[0]
-    const keys = Object.keys(devices)
-    for (const index in keys){
-        const device = keys[index];
-        const instance = getInstance({obj: devices, key: device});
-        const prefix = getPrefix(device)
-        const inputs = getInputs(mapping, prefix, instance);
-        returnValue[index] = {
-            deviceName: keys[index],
-            inputs: inputs,
-            instance: instance,
-            prefix: getPrefix(device)
+    let count = 0
+    //for (const deviceType in devices){
+    for (const [deviceType, subDevices] of Object.entries(devices)) {
+        for (const [_, subDevice] of Object.entries(subDevices)) {
+            const instance = subDevice.attributes.instance;
+            const prefix = getPrefix(deviceType, instance)
+            const deviceName = getDeviceName(mapping, deviceType, instance);
+            const inputs = getInputs(mapping, prefix, instance);
+            returnValue[count] = {
+                deviceName: deviceName,
+                deviceType: deviceType,
+                instance: instance,
+                prefix: prefix,
+                inputs: inputs
+            }
+            count++;
         }
+
     }
 
     console.log("--- getDevices-Debug --- END")
-
+    console.log("getDevices(mapping): ",returnValue)
     return returnValue;
 };
 /* eslint-enable @typescript-eslint/no-unused-vars */
 
-const getInputs = (mapping: Mapping, prefix: string, instance: number): Inputs[] => {
+const getDeviceName = (mapping: Mapping, deviceType: string, instance: string): string => {
+    const options = mapping['options']
+    const indices = Object.entries(options)
+    for (const index in indices){
+        const option = options[index]['attributes'];
+        if(option['type'] === deviceType && option['instance'] === instance) {
+            return option['Product']
+        }
+    }
+    return ""
+}
+
+const getInputs = (mapping: Mapping, prefix: string, instance: string): Inputs[] => {
     console.log(mapping,prefix,instance)
     // TODO
     return []
 }
 
-const getInstance = ({obj, key}: { obj: any, key: string }): number => {
-    return obj[key][0]['attributes']['instance'];
-}
 
-const getPrefix = (device: string): string => {
+const getPrefix = (device: string, instance: string): string => {
     switch ( device ) {
         case "keyboard":
-            return "k"
+            return "kb".concat(instance).concat("_");
         case "mouse":
-            return "m"
+            return "mo".concat(instance).concat("_");
         case "joystick":
-            return "js"
+            return "js".concat(instance).concat("_");
         default:
             return "unknown"
     }
