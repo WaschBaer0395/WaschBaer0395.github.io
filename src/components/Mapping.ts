@@ -1,70 +1,80 @@
 // the interface to represent the xml structure
 
-export interface ActionMaps {
-    _attributes: {
-        version: string
-        optionsVersion: string
-        rebindVersion: string
-        profileName: string
-    }
-    CustomisationUIHeader: {
-        _attributes: {
-            label: string
-            description: string
-            image: string
+export interface Mapping {
+    ActionMaps: {
+        attributes: {
+            version: string
+            optionsVersion: string
+            rebindVersion: string
+            profileName: string
         }
-        devices: {
-            keyboard: {
-                _instance: string
+        CustomisationUIHeader: {
+            attributes: {
+                label: string
+                description: string
+                image: string
             }
-            mouse: {
-                _instance: string
+            devices: {
+                keyboard: {
+                    attributes: {
+                        instance: string
+                    }
+                }
+                mouse: {
+                    attributes: {
+                        instance: string
+                    }
+                }
+                joystick: Array<{
+                    attributes: {
+                        instance: string
+                    }
+                }>
             }
-            joystick: Array<{
-                _instance: string
-            }>
-        }
-        categories: {
-            category: Array<{
-                _label: string
-            }>
-        }
-    }
-    deviceoptions: Array<{
-        _attributes: {
-            name: string
-        }
-        option: Array<{
-            _attributes: {
-                input: string
-                deadzone?: string
-                saturation?: string
-                acceleration?: string
+            categories: {
+                category: Array<{
+                    attributes: {
+                        label: string
+                    }
+                }>
             }
-        }>
-    }>
-    options: Array<{
-        _attributes: {
-            type: string
-            instance: string
-            Product: string
         }
-    }>
-    actionmap: Array<{
-        _attributes: {
-            name: string
-        }
-        action: Array<{
-            _attributes: {
+        deviceoptions: Array<{
+            attributes: {
                 name: string
             }
-            rebind: Array<{
-                _attributes: {
+            option: Array<{
+                attributes: {
                     input: string
-                    activationMode?: string
-                    multiTap?: string
+                    deadzone?: string
+                    saturation?: string
+                    acceleration?: string
                 }
             }>
         }>
-    }>
+        options: Array<{
+            attributes: {
+                type: string
+                instance: string
+                Product: string
+            }
+        }>
+        actionmap: Array<{
+            attributes: {
+                name: string
+            }
+            action: Array<{
+                attributes: {
+                    name: string
+                }
+                rebind: Array<{
+                    attributes: {
+                        input: string
+                        activationMode?: string
+                        multiTap?: string
+                    }
+                }>
+            }>
+        }>
+    }
 }
