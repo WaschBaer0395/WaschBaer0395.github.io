@@ -1,4 +1,5 @@
 // the interface to represent the xml structure
+
 export interface Mapping {
     attributes: {
         version: string
