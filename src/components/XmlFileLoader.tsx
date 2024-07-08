@@ -1,90 +1,49 @@
 // src/components/XmlFileLoader.tsx
 import React, {useState} from 'react'
-import xmlJs from 'xml-js';
+import {ActionMaps} from './Mapping.ts'
+import {convertToXML, parseXML} from './parseXML';
 
-interface Mapping {
-    ActionMaps: {
-        version: string
-        optionsVersion: string
-        rebindVersion: string
-        profileName: string
-        CustomisationUIHeader: {
-            label: string
-            description: string
-            image: string
-            devices: {
-                keyboard: {
-                    _instance: string
-                }
-                mouse: {
-                    _instance: string
-                }
-                joystick: Array<{
-                    _instance: string
-                }>
-            }
-            categories: {
-                category: Array<{
-                    _label: string
-                }>
-            }
-        }
-        deviceoptions: Array<{
-            name: string
-            option: Array<{
-                input: string
-                deadzone?: string
-                saturation?: string
-                acceleration?: string
-            }>
-        }>
-        options: Array<{
-            type: string
-            instance: string
-            Product: string
-        }>
-        actionmap: Array<{
-            name: string
-            action: Array<{
-                name: string
-                rebind: Array<{
-                    input: string
-                    activationMode?: string
-                    multiTap?: string
-                }>
-            }>
-        }>
-    }
-}
 
 const XmlFileLoader: React.FC = () => {
-    const [xmlData, setXmlData] = useState<Mapping | null>(null)
+    const [data, setData] = useState<ActionMaps | null>(null);
+    const [error, setError] = useState<string | null>(null);
 
-    const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0]
-        if (!file) return
-
-        try {
-            const text = await file.text() // Read file content as text
-            const jsonData = xmlJs.xml2js(text, { compact: true }) as Mapping
-            setXmlData(jsonData)
-            console.log(xmlData)
-        } catch (error) {
-            console.error('Error parsing XML file:', error)
+    const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            try {
+                const fileText = await file.text();
+                const parsedData = await parseXML(fileText);
+                setData(parsedData);
+                setError(null);
+                console.log(parsedData)
+            } catch (err) {
+                setError('Failed to parse XML');
+            }
         }
-    }
+    };
+
+    const handleDownload = () => {
+        if (data) {
+            const xml = convertToXML(data);
+            const blob = new Blob([xml], { type: 'application/xml' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'converted_file.xml';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+    };
+
+
 
     return (
         <div>
-            <input type="file" onChange={handleFileChange} accept=".xml" />
-            {xmlData ? (
-                <div>
-                    {/* */}
-                    <pre>{JSON.stringify(xmlData, null, 2)}</pre>
-                </div>
-            ) : (
-                <div>No XML file uploaded yet.</div>
-            )}
+            <h1>Upload XML File</h1>
+            <input type="file" onChange={handleFileUpload} accept=".xml" />
+            {error && <div style={{ color: 'red' }}>{error}</div>}
+            <button onClick={handleDownload}>Download XML</button>
         </div>
     )
 }
