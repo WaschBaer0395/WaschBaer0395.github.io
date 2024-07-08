@@ -23,7 +23,7 @@ const XmlFileLoader: React.FC = () => {
                 const parsedData =  await parseXML(fileText)
                 setData(parsedData);
                 setDevices(parseDevices(parsedData));
-                while(devices.length)
+                if(devices.length)
                     console.log("Devices: ",devices)
 
             } catch (err) {
