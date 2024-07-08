@@ -1,5 +1,5 @@
 // src/components/XmlFileLoader.tsx
-import React, {useState} from 'react'
+import React, {useRef, useState} from 'react'
 import {Mapping} from '../utils/interfaces/Mapping.ts'
 import {convertToXML, parseXML} from '../utils/parseXML.ts';
 import {Device} from "../utils/interfaces/Device.ts";
@@ -12,7 +12,7 @@ const XmlFileLoader: React.FC = () => {
 
 
     /* eslint-disable @typescript-eslint/no-unused-vars */
-    const [devices, setDevices] = useState<Device[]>([])
+    const devices = useRef<Device[]>([])
 
 
     const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,9 +22,9 @@ const XmlFileLoader: React.FC = () => {
                 const fileText = await file.text();
                 const parsedData =  await parseXML(fileText)
                 setData(parsedData);
-                setDevices(parseDevices(parsedData));
-                if(devices.length)
-                    console.log("Devices: ",devices)
+                devices.current = parseDevices(parsedData);
+                if(devices.current.length)
+                    console.log("Devices: ",devices.current)
 
             } catch (err) {
                 setError('Failed to parse XML');
