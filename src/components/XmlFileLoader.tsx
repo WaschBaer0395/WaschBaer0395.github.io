@@ -2,7 +2,7 @@
 import React, {useState} from 'react'
 import {Mapping} from '../utils/interfaces/Mapping.ts'
 import {convertToXML, parseXML} from '../utils/parseXML.ts';
-import {Devices} from "../utils/interfaces/Devices.ts";
+import {Device} from "../utils/interfaces/Device.ts";
 import {getDevices} from "../utils/convert.ts";
 
 
@@ -12,7 +12,7 @@ const XmlFileLoader: React.FC = () => {
 
 
     /* eslint-disable @typescript-eslint/no-unused-vars */
-    const [devices, setDevices] = useState<Devices[]>([])
+    const [devices, setDevices] = useState<Device[]>([])
 
 
     const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {

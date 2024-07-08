@@ -58,7 +58,7 @@ export interface Mapping {
             Product: string
         }
     }>
-    actionmap: Actionmap
+    actionmap: Array<Actionmap>
 }
 
 export interface Actionmap {
