@@ -3,7 +3,7 @@ import {Device, Input, PrefixIndex} from "./interfaces/Device.ts";
 
 
 /* eslint-enable @typescript-eslint/no-unused-vars */
-export const getDevices = (mapping: Mapping): Array<Device> => {
+export const parseDevices = (mapping: Mapping): Array<Device> => {
     /*
         meta info that is not preserved here:
         mapping.attributes
@@ -12,8 +12,7 @@ export const getDevices = (mapping: Mapping): Array<Device> => {
         mapping['modifiers'] // <- this one is strange,
      */
     const returnValue = new Array<Device>()
-    console.log("--- getDevices-Debug --- START")
-    //console.log("Mapping: ",mapping)
+
     const devices = mapping['CustomisationUIHeader'][0].devices[0]
     let deviceCount = 0
     //for (const deviceType in devices){
@@ -36,13 +35,8 @@ export const getDevices = (mapping: Mapping): Array<Device> => {
     }
 
     const  actionmaps = mapping.actionmap
-    //const inputs =
     getInputs(returnValue,actionmaps)
 
-
-
-    console.log("--- getDevices-Debug --- END")
-    console.log("getDevices(mapping): ",returnValue)
     return returnValue;
 };
 /* eslint-enable @typescript-eslint/no-unused-vars */

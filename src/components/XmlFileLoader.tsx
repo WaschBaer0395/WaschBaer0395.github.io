@@ -3,7 +3,7 @@ import React, {useState} from 'react'
 import {Mapping} from '../utils/interfaces/Mapping.ts'
 import {convertToXML, parseXML} from '../utils/parseXML.ts';
 import {Device} from "../utils/interfaces/Device.ts";
-import {getDevices} from "../utils/convert.ts";
+import {parseDevices} from "../utils/convert.ts";
 
 
 const XmlFileLoader: React.FC = () => {
@@ -22,7 +22,9 @@ const XmlFileLoader: React.FC = () => {
                 const fileText = await file.text();
                 const parsedData =  await parseXML(fileText)
                 setData(parsedData);
-                setDevices(getDevices(parsedData));
+                setDevices(parseDevices(parsedData));
+                while(devices.length)
+                    console.log("Devices: ",devices)
 
             } catch (err) {
                 setError('Failed to parse XML');
