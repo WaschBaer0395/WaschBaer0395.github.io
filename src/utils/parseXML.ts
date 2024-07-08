@@ -1,6 +1,6 @@
 // parseXML.ts
 import { parseStringPromise, Builder } from 'xml2js';
-import { Mapping } from './Mapping.ts';
+import { Mapping } from './interfaces/Mapping.ts';
 
 export const parseXML = async (xmlData: string): Promise<Mapping> => {
     try {

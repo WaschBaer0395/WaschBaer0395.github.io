@@ -1,8 +1,9 @@
 // src/components/XmlFileLoader.tsx
 import React, {useState} from 'react'
-import {Mapping} from './Mapping.ts'
-import {convertToXML, parseXML} from './parseXML';
-import {Devices} from "./Devices.ts";
+import {Mapping} from '../utils/interfaces/Mapping.ts'
+import {convertToXML, parseXML} from '../utils/parseXML.ts';
+import {Devices} from "../utils/interfaces/Devices.ts";
+import {getDevices} from "../utils/convert.ts";
 
 
 const XmlFileLoader: React.FC = () => {
@@ -18,6 +19,7 @@ const XmlFileLoader: React.FC = () => {
                 const fileText = await file.text();
                 const parsedData =  await parseXML(fileText)
                 setData(parsedData);
+                setDevices(getDevices(parsedData));
 
             } catch (err) {
                 setError('Failed to parse XML');
