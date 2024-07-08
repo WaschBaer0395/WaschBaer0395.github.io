@@ -9,6 +9,9 @@ import {getDevices} from "../utils/convert.ts";
 const XmlFileLoader: React.FC = () => {
     const [data, setData] = useState<Mapping | null>(null)
     const [error, setError] = useState<string | null>(null)
+
+    
+    // @ts-ignore
     const [devices, setDevices] = useState<Devices[]>([])
 
 
