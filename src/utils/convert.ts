@@ -186,6 +186,8 @@ const getPrefix = (device: string, instance: string): string => {
             return "mo".concat(instance).concat("_");
         case "joystick":
             return "js".concat(instance).concat("_");
+        case "gamepad":
+            return "gp".concat(instance).concat("_");
         default:
             return "unknown"
     }
