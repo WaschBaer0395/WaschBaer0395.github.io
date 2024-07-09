@@ -4,7 +4,7 @@ export interface Device {
     instance: string,
     prefix: string,
     inputs: Input | { }, // 0-135
-
+    deviceoptions: DeviceOption | { }
 }
 
 export interface Input {
@@ -14,6 +14,14 @@ export interface Input {
             activationmode?: string,
             multitap?: string
         }
+    }
+}
+
+export interface DeviceOption {
+    [input: string]: {
+        deadzone?: string,
+        saturation?: string,
+        acceleration?: string
     }
 }
 

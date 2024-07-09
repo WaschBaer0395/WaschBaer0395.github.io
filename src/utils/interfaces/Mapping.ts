@@ -38,19 +38,7 @@ export interface Mapping {
             }>
         }
     }>
-    deviceoptions: {
-        attributes: {
-            name: string
-        }
-        option: Array<{
-            attributes: {
-                input: string
-                deadzone?: string
-                saturation?: string
-                acceleration?: string
-            }
-        }>
-    }
+    deviceoptions: Array<MappingDeviceOption>
     options: Array<{
         attributes: {
             type: string
@@ -59,6 +47,20 @@ export interface Mapping {
         }
     }>
     actionmap: Array<Actionmap>
+}
+
+export interface MappingDeviceOption {
+    attributes: {
+        name: string
+    }
+    option: Array<{
+        attributes: {
+            input: string
+            deadzone?: string
+            saturation?: string
+            acceleration?: string
+        }
+    }>
 }
 
 export interface Actionmap {
