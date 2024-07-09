@@ -101,9 +101,7 @@ const getInputs = (devices: Device[], actionmaps: Array<Actionmap>): void => {
 
                 // TODO split multiple inputs
                 const inputArray = inputString.split("+")
-                console.log("inputArray:", inputArray)
                 for (const [_, input] of Object.entries(inputArray)) {
-                    console.log(">input:", input)
                     if (prefix in prefixIndex) {
                         const index = prefixIndex[prefix]
                         const actionName = action.attributes.name;
