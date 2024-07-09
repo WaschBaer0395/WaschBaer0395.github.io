@@ -99,7 +99,7 @@ const getInputs = (devices: Device[], actionmaps: Array<Actionmap>): void => {
                 const inputString =action.rebind[0].attributes.input.substring(
                     action.rebind[0].attributes.input.indexOf('_') + 1);
 
-                // TODO split multiple inputs
+                // split multiple inputs
                 const inputArray = inputString.split("+")
                 for (const [_, input] of Object.entries(inputArray)) {
                     if (prefix in prefixIndex) {
