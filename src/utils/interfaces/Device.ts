@@ -4,7 +4,7 @@ export interface Device {
     instance: string,
     prefix: string,
     inputs: Input | { }, // 0-135
-    deviceoptions: DeviceOption | { }
+    deviceOptions: DeviceOption | { }
 }
 
 export interface Input {

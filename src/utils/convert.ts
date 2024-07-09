@@ -38,7 +38,7 @@ export const parseDevices = (mapping: Mapping): Array<Device> => {
                 instance: instance,
                 prefix: prefix,
                 inputs: inputs,
-                deviceoptions: deviceOptions
+                deviceOptions: deviceOptions
             }
             deviceCount++;
         }
@@ -161,11 +161,11 @@ const getDeviceOptions = (devices: Device[], deviceoptions: Array<MappingDeviceO
         }
         for (const [index, _] of Object.entries(devices)) {
             if (deviceOptions[Number(index)]) {
-                devices[Number(index)].deviceoptions = deviceOptions[Number(index)];
+                devices[Number(index)].deviceOptions = deviceOptions[Number(index)];
             }
             else
             {
-                devices[Number(index)].deviceoptions = {}
+                devices[Number(index)].deviceOptions = {}
             }
         }
     }
