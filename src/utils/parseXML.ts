@@ -1,6 +1,6 @@
 // parseXML.ts
-import { parseStringPromise, Builder } from 'xml2js';
-import { Mapping } from './interfaces/Mapping.ts';
+import {Builder, parseStringPromise} from 'xml2js';
+import {Mapping} from './interfaces/Mapping.ts';
 
 export const parseXML = async (xmlData: string): Promise<Mapping> => {
     try {
@@ -13,6 +13,5 @@ export const parseXML = async (xmlData: string): Promise<Mapping> => {
 
 export const convertToXML = (data: Mapping): string => {
     const builder = new Builder({ rootName: 'ActionMaps', attrkey:"attributes", headless: true });
-    const xml = builder.buildObject(data);
-    return xml;
+    return builder.buildObject(data);
 };

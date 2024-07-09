@@ -4,11 +4,11 @@ import {capitalize} from "../utils.ts";
 
 
 
-/* eslint-enable @typescript-eslint/no-unused-vars */
 /**
  * @param {Mapping} mapping - The mapping containing devices data.
  * @returns {Device[]} - The containing data fitted into an Array of Device
  */
+/* eslint-enable @typescript-eslint/no-unused-vars */
 export const parseDevices = (mapping: Mapping): Array<Device> => {
     /*
         meta info that is not preserved here:
