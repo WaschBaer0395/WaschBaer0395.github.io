@@ -13,6 +13,7 @@ export interface Input {
             category: string,
             activationmode?: string,
             multitap?: string
+            inputSet?: Array<string>
         }
     }
 }

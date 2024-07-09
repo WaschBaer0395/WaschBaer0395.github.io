@@ -94,22 +94,31 @@ const getInputs = (devices: Device[], actionmaps: Array<Actionmap>): void => {
 
             for (const [_, action] of Object.entries(actionmap.action)) {
 
-                const input = action.rebind[0].attributes.input;
-                const prefix = input.substring(0, input.indexOf('_') + 1);
-                if (prefix in prefixIndex) {
-                    const inputName = input.substring(input.indexOf('_') + 1);
-                    const index = prefixIndex[prefix]
-                    const actionName = action.attributes.name;
-                    const mTap = action.rebind[0].attributes.multiTap;
-                    const aMod = action.rebind[0].attributes.activationMode;
-                    if (!inputs[Number(index)][inputName]) {
-                        inputs[Number(index)][inputName] = {}
+                const prefix = action.rebind[0].attributes.input.substring(0,
+                    action.rebind[0].attributes.input.indexOf('_') + 1);
+                const inputString =action.rebind[0].attributes.input.substring(
+                    action.rebind[0].attributes.input.indexOf('_') + 1);
+
+                // TODO split multiple inputs
+                const inputArray = inputString.split("+")
+                console.log("inputArray:", inputArray)
+                for (const [_, input] of Object.entries(inputArray)) {
+                    console.log(">input:", input)
+                    if (prefix in prefixIndex) {
+                        const index = prefixIndex[prefix]
+                        const actionName = action.attributes.name;
+                        const mTap = action.rebind[0].attributes.multiTap;
+                        const aMod = action.rebind[0].attributes.activationMode;
+                        if (!inputs[Number(index)][input]) {
+                            inputs[Number(index)][input] = {}
+                        }
+                        inputs[Number(index)][input][actionName] = {
+                            category : category
+                        }
+                        if (aMod) inputs[Number(index)][input][actionName].activationmode = aMod
+                        if (mTap) inputs[Number(index)][input][actionName].category = mTap
+                        if (inputArray.length>1) inputs[Number(index)][input][actionName].inputSet = inputArray
                     }
-                    inputs[Number(index)][inputName][actionName] = {
-                        category : category
-                    }
-                    if (aMod) inputs[Number(index)][inputName][actionName].activationmode = aMod
-                    if (mTap) inputs[Number(index)][inputName][actionName].category = mTap
                 }
             }
         }
